@@ -1,0 +1,649 @@
+/* reset */
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+  font-style: normal;
+}
+ul {
+  list-style: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+caption,
+th {
+  text-align: left;
+}
+q:before,
+q:after {
+  content: "";
+}
+object,
+embed {
+  vertical-align: top;
+}
+legend {
+  display: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+}
+img,
+abbr,
+acronym,
+fieldset {
+  border: 0;
+}
+
+body {
+  font: 14px/1.9 "Noto Sans JP", Arial, Verdana, 游ゴシック, YuGothic,
+    "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", メイリオ, Meiryo,
+    sans-serif;
+  font-weight: 300;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  color: #000;
+  background: #fff;
+  overflow-y: scroll;
+}
+
+a {
+  color: #0066ff;
+  text-decoration: none;
+}
+
+a:hover,
+.active {
+  text-decoration: underline;
+}
+
+a:active,
+a:focus,
+input:active,
+input:focus {
+  outline: 0;
+}
+
+/* 変数
+------------------------------------------------------------*/
+$main-color: #15aeab;
+$white: #fff;
+$nav-height: 8vh;
+$section-padding-top: 70px;
+$inner-padding-bottom: 80px;
+
+/* ヘッダー
+------------------------------------------------------------*/
+#header {
+  text-align: center;
+}
+
+#header h1 {
+  padding-top: 60px;
+}
+
+// ナビバー
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: $main-color;
+  height: $nav-height;
+}
+
+.logo {
+  color: $white;
+  letter-spacing: 5px;
+  font-size: 20px;
+  transition: opacity 0.3s ease-out;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+  width: 40%;
+}
+
+.nav-links a {
+  display: inline-block;
+  color: $white;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 5px;
+  transform: scale(1);
+  transition: all 0.2s ease-out;
+}
+.nav-links a:hover {
+  color: $white;
+  text-decoration: none;
+  font-weight: bold;
+  transform: scale(1.2);
+  opacity: 0.6;
+}
+
+.burger {
+  display: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.burger div {
+  width: 25px;
+  height: 2px;
+  margin: 5px;
+  background-color: $white;
+  transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 1024px) {
+  .nav-links {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  nav {
+    justify-content: space-between;
+    padding: 0 15px;
+  }
+
+  .nav-links {
+    position: absolute;
+    right: 0;
+    top: $nav-height;
+    height: 92vh;
+    background-color: $main-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    transform: translateX(100%);
+    transition: transform 0.2s ease-in;
+    z-index: 99;
+    &.nav-active {
+      transform: translateX(0);
+    }
+  }
+
+  .nav-links li {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: relative;
+  }
+  .nav-links.nav-active li {
+    opacity: 1;
+    animation: navLinkFade 0.4s ease-in;
+  }
+  .burger {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .nav-links {
+    width: 100%;
+  }
+}
+
+.toggle .line1 {
+  transform: rotate(-45deg) translate(-5px, 5px);
+}
+.toggle .line2 {
+  opacity: 0;
+}
+.toggle .line3 {
+  transform: rotate(45deg) translate(-5px, -5px);
+}
+
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+/* フッター
+------------------------------------------------------------*/
+#footer {
+  clear: both;
+  padding: 50px 10px 50px 0;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* Topに戻るボタン
+------------------------------------------------------------*/
+#return-top {
+  background-color: $main-color;
+  border-radius: 50%;
+  bottom: 10px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  height: 50px;
+  line-height: 50px;
+  outline: 0;
+  position: fixed;
+  right: 10px;
+  text-align: center;
+  width: 50px;
+  z-index: 80;
+  padding: 5px;
+  display: block;
+  border: none;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.5s ease;
+  &:hover {
+    opacity: 0.6;
+    text-decoration: none;
+  }
+  &.is-hide {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+.overlay {
+  display: block;
+  opacity: 0;
+  position: fixed;
+  top: $nav-height;
+  right: 0;
+  width: 100%;
+  height: 120%;
+  transform: translateX(100%);
+  background: rgba(0, 0, 0, 0.7);
+  visibility: hidden;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 98;
+  transition: all 0.3s ease;
+  &.overlay-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+}
+
+.icon {
+  font-size: 1.2em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sns-icon {
+  font-size: 1.5em;
+  color: #000;
+  transition: all 0.3s ease;
+  padding: 5px;
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+#sns {
+  display: flex;
+  grid-column-gap: 0.5em;
+  padding: 5px 0;
+}
+
+.main {
+  position: relative;
+  top: $nav-height;
+}
+/* 共通
+------------------------------------------------------------*/
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+section {
+  clear: both;
+  padding-top: $section-padding-top;
+}
+
+section h2 {
+  font-family: "Arial", sans-serif;
+  width: 60%;
+  margin: 0 auto 40px;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+}
+
+section h2 span {
+  background: #fff;
+  padding: 0 80px;
+}
+
+.inner {
+  width: 60%;
+  margin: 0 auto;
+  padding-bottom: $inner-padding-bottom;
+}
+
+/* SEC02 Gallery
+------------------------------------------------------------*/
+
+#gallery li {
+  float: left;
+  width: calc(100% / 3);
+  line-height: 0;
+}
+
+#gallery img {
+  width: 100%;
+  height: auto;
+}
+
+/* SEC03 PROJECT
+------------------------------------------------------------*/
+#sec03 img {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+/* SEC04 INFO
+------------------------------------------------------------*/
+.col3 img {
+  display: block;
+  margin: 0 auto 5px;
+}
+
+.col3 li {
+  line-height: 2;
+}
+
+.col3 .img {
+  padding: 80px 50px;
+  margin-bottom: 40px;
+  line-height: 0 !important;
+  background: #f6f6f6;
+}
+
+#sec04_02 {
+  text-align: center;
+  padding: 220px 20px;
+}
+
+#sec04_02 img {
+  width: auto;
+}
+
+/* SEC05 CONTACTS
+------------------------------------------------------------*/
+#sec05 p:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.col2 li {
+  display: inline-block;
+  width: 100%;
+  margin: 20px 0;
+}
+
+#sns img {
+  padding: 35px 10px 5px 0;
+}
+
+#sns a:hover img {
+  opacity: 0.8;
+}
+
+#map {
+  position: relative;
+  padding-bottom: 75%;
+  height: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+#map iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0;
+}
+
+/* RESPONSIVE 設定
+------------------------------------------------------------*/
+
+@media only screen and (min-width: 1200px) {
+  .inner {
+    width: 1024px;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  body {
+    font-size: 14px;
+  }
+
+  a#menu {
+    display: none;
+  }
+
+  .panel {
+    display: block !important;
+  }
+
+  /* SEC03 PROJECT
+	-----------------*/
+  .col3 {
+    text-align: center;
+  }
+
+  .col3 li {
+    display: inline-block;
+    width: 28%;
+    padding: 0 2.5% 50px;
+    margin-bottom: 0;
+    vertical-align: top;
+    text-align: left;
+  }
+
+  #footer {
+    padding: 30px 10px 70px 0;
+  }
+}
+
+@media only screen and (min-width: 641px) {
+  .col2 li {
+    width: 60%;
+    vertical-align: top;
+  }
+  .col2 li:first-child {
+    width: 35%;
+    padding-right: 4%;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .inner {
+    width: 94%;
+    padding-bottom: 70px;
+  }
+  .col3 li {
+    line-height: 1.7;
+  }
+  .col3 img {
+    margin: 0 auto;
+  }
+  .col3 .img {
+    padding: 30px;
+    margin-bottom: 20px;
+  }
+  #gallery li {
+    float: none;
+    width: 100%;
+  }
+  #map iframe {
+    width: 96% !important;
+    left: 2%;
+  }
+  #sec04_02 {
+    padding: 50px 20px;
+  }
+}
+
+@media only screen and (max-width: 799px) {
+  #header {
+    position: fixed;
+    width: 100%;
+    z-index: 500;
+  }
+
+  #headerWrap {
+    position: relative;
+    width: 100%;
+    height: 70px;
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+  }
+
+  #header h1 {
+    padding-top: 10px;
+  }
+
+  #header h1 img {
+    margin-top: 3px;
+    max-height: 45px;
+    width: auto !important;
+  }
+
+  a#menu {
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+  }
+
+  #menuBtn {
+    display: block;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    width: 18px;
+    height: 2px;
+    margin: -1px 0 0 -7px;
+    background: #000;
+    transition: 0.2s;
+  }
+
+  #menuBtn:before,
+  #menuBtn:after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 18px;
+    height: 2px;
+    background: #000;
+    transition: 0.3s;
+  }
+
+  #menuBtn:before {
+    margin-top: -7px;
+  }
+
+  #menuBtn:after {
+    margin-top: 5px;
+  }
+
+  a#menu .close {
+    background: transparent;
+  }
+
+  a#menu .close:before,
+  a#menu .close:after {
+    margin-top: 0;
+  }
+
+  a#menu .close:before {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+
+  a#menu .close:after {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+
+  .panel {
+    width: 100%;
+    display: none;
+    overflow: hidden;
+    position: relative;
+    left: 0;
+    top: 0;
+    z-index: 100;
+  }
+
+  .col3 li {
+    margin: 50px auto 0 auto;
+    display: block;
+  }
+  section {
+    padding-top: 50px;
+  }
+  section h2 {
+    margin: 0 auto 20px;
+  }
+  section h2 span {
+    padding: 0 30px;
+  }
+}
